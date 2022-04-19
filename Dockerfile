@@ -1,12 +1,16 @@
-FROM alpine:3.7
-MAINTAINER lukasgarcya@hotmail.com
-RUN mkdir -p /opt/djangoSIGE/
-WORKDIR /opt/djangoSIGE/
-COPY requirements.txt /opt/djangoSIGE/
-RUN apk add --no-cache python3 python3-dev \
-    py3-cffi zlib-dev gcc jpeg-dev \
-    linux-headers libressl-dev \
-    libxml2-dev libxslt-dev \
-    musl-dev postgresql-dev \
-    && pip3 install -r requirements.txt \
-    && pip3 install gunicorn psycopg2
+FROM python:3.7
+
+ADD requirements.txt requirements.txt
+
+RUN apt-get update
+RUN apt-get install -y libxml2 gcc python3-dev libxml2-dev libxslt1-dev zlib1g-dev python3-pip
+
+RUN pip install -r requirements.txt
+
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod 755 /usr/local/bin/entrypoint.sh \
+    && ln -s /usr/local/bin/entrypoint.sh /
+
+EXPOSE 8000
+
+ENTRYPOINT [ "entrypoint.sh" ]

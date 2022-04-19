@@ -9,6 +9,8 @@ from django.utils.crypto import get_random_string
 chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
 
 CONFIG_STRING = """
+POSTGRESS_USER=
+POSTGRESS_PASS=
 DEBUG=True
 SECRET_KEY=%s
 ALLOWED_HOSTS=127.0.0.1, .localhost
