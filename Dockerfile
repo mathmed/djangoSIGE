@@ -3,7 +3,7 @@ FROM python:3.7
 ADD requirements.txt requirements.txt
 
 RUN apt-get update
-RUN apt-get install -y libxml2 gcc python3-dev libxml2-dev libxslt1-dev zlib1g-dev python3-pip psycopg2
+RUN apt-get install -y libxml2 gcc python3-dev libxml2-dev libxslt1-dev zlib1g-dev python3-pip
 
 RUN pip install -r requirements.txt
 
