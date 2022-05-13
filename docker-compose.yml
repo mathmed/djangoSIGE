@@ -10,6 +10,8 @@ services:
       - 5432:5432
     volumes:
       - ./database:/var/lib/postgresql/data
+    networks:
+      - app_network
   app:
     container_name: sige
     build: ./
@@ -19,4 +21,8 @@ services:
       - ./:/home/app
     links:
       - postgres
-  
+    networks:
+      - app_network
+networks:
+  app_network:
+    driver: bridge
